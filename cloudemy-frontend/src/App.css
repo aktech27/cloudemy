@@ -1,0 +1,16 @@
+#root {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+}
+.toastContainer {
+  padding: 4px 10px;
+  border-radius: 10px;
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  font-family: "Cairo", sans-serif;
+  right: 10px;
+}

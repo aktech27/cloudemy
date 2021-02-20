@@ -1,0 +1,87 @@
+.placeHolder {
+  position: absolute;
+  font-family: "Cairo", sans-serif;
+  font-size: 20px;
+  transition: all 0.5s ease-in-out;
+}
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  padding: 5px 15px;
+  border-radius: 10px;
+  color: white;
+  font-family: "Cairo", sans-serif;
+  z-index: 1;
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 10%;
+  border: 5px solid;
+  border-color: transparent transparent #333 transparent;
+}
+.tp-fname,
+.tp-pswd,
+.tp-email {
+  margin-top: 78px;
+  margin-left: -450px;
+}
+.tp-lname,
+.tp-cpswd,
+.tp-phone {
+  margin-top: 75px;
+  margin-right: -250px;
+}
+input[type="text"]:focus + .placeHolder,
+input[type="password"]:focus + .placeHolder {
+  font-size: 16px;
+  color: blue;
+  margin-top: -5px !important;
+}
+input[type="text"]:focus + .ph-fname,
+input[type="password"]:focus + .ph-pswd {
+  margin-left: -540px !important;
+}
+input[type="text"]:focus + .ph-email {
+  margin-left: -570px !important;
+}
+input[type="text"]:focus + .ph-lname {
+  margin-left: -220px !important;
+}
+input[type="text"]:focus + .ph-phone {
+  margin-left: -250px !important;
+}
+input[type="password"]:focus + .ph-cpswd {
+  margin-left: -180px !important;
+}
+@media only screen and (max-width: 705px) {
+  input[type="text"]:focus + .ph-fname,
+  input[type="text"]:focus + .ph-email,
+  input[type="password"]:focus + .ph-pswd {
+    font-size: 16px;
+    color: blue;
+    margin-left: -200px !important;
+    margin-top: -5px !important;
+  }
+  input[type="text"]:focus + .ph-lname,
+  input[type="text"]:focus + .ph-phone,
+  input[type="password"]:focus + .ph-cpswd {
+    font-size: 16px;
+    color: blue;
+    margin-left: -200px !important;
+    margin-top: 80px !important;
+  }
+  .tp-fname,
+  .tp-pswd,
+  .tp-email {
+    margin-top: 75px;
+    margin-left: -134px;
+  }
+  .tp-lname,
+  .tp-cpswd,
+  .tp-phone {
+    margin-top: 160px;
+    margin-right: 136px;
+  }
+}

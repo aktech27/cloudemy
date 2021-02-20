@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "'Cairo',san-serif";
+}
+.image-container img {
+  width: 100%;
+  object-fit: contain;
+}
+.placeholder {
+  position: absolute;
+  font-family: "Cairo", sans-serif;
+  font-size: 20px;
+  transition: all 0.5s ease-in-out;
+}
+.ph-mail {
+  margin-top: 25px;
+}
+.ph-psd {
+  margin-top: 200px;
+}
+h3 a {
+  text-decoration: none;
+  color: blue;
+}
+input[type="text"],
+input[type="password"] {
+  height: 40px;
+  width: 300px;
+  border-radius: 10px;
+  margin: 20px 10px;
+  padding: 2px 5px;
+  font-size: 20px;
+  transition: all 0.5s ease-in-out;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  height: 45px;
+  width: 300px;
+  border-radius: 15px;
+  border: 2px solid blue;
+  box-shadow: 3px 3px 10px rgb(58, 58, 255);
+  outline: none;
+}
+input[type="text"]:focus + .placeholder,
+input[type="password"]:focus + .placeholder {
+  margin-left: -220px;
+  font-size: 18px;
+  color: blue;
+}
+input[type="text"]:focus + .ph-mail {
+  margin-top: -40px;
+}
+input[type="password"]:focus + .ph-psd {
+  margin-top: 130px;
+}
+input[type="submit"] {
+  font-size: 24px;
+  background-image: linear-gradient(to right, lime, aqua, lime);
+  margin: 10px;
+  padding: 10px 20px;
+  transition: 0.5s ease-in-out;
+  background-size: 200%;
+  color: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  outline: none;
+}
+input[type="submit"]:hover {
+  background-position: right;
+  color: black;
+  border: 2px solid black;
+  text-decoration: none;
+  cursor: pointer;
+}
