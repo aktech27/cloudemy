@@ -31,11 +31,11 @@ router.post("/login", (req, res) => {
               .send({ error: "Account is not verified yet. Please check your registered email" });
           }
           const jwtToken = jwt.sign({ _id: existingUser._id }, JWTSEC);
-          let { _id, firstName, lastName, email } = existingUser;
+          let { _id, firstName, lastName, email, photo, phone } = existingUser;
           res.status(200).send({
             message: "User Logged in successfully",
             token: jwtToken,
-            user: { _id, firstName, lastName, email },
+            user: { _id, firstName, lastName, email, photo, phone },
           });
         } else {
           return res.status(422).send({ error: "Invalid Password" });
