@@ -1,4 +1,5 @@
 import "../assets/customCSS/profile.css";
+import { Link } from "react-router-dom";
 const Profile = () => {
   const showEditProfile = (e) => {
     let hint = document.createElement("div");
@@ -22,15 +23,17 @@ const Profile = () => {
           " " +
           JSON.parse(localStorage.getItem("User")).lastName}
       </h3>
-      <img
-        id="propic"
-        src={JSON.parse(localStorage.getItem("User")).photo}
-        alt="profilepic"
-        onMouseEnter={(e) => showEditProfile(e)}
-        onMouseMove={(e) => changeEditProfile(e)}
-        onMouseLeave={() => hideEditProfile()}
-        onClick={() => window.alert("Works")}
-      />
+      <Link to="./editprofile">
+        <img
+          id="propic"
+          src={JSON.parse(localStorage.getItem("User")).photo}
+          alt="profilepic"
+          onMouseEnter={(e) => showEditProfile(e)}
+          onMouseMove={(e) => changeEditProfile(e)}
+          onMouseLeave={() => hideEditProfile()}
+          onClick={() => hideEditProfile()}
+        />
+      </Link>
     </div>
   );
 };
