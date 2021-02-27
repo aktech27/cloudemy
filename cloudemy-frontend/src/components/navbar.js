@@ -20,7 +20,7 @@ const Navbar = (props) => {
           </a>
         </li>
         <li>
-          <a className={props.Active[1]} href="#news">
+          <a className={props.Active[1]} href="./createroom">
             Link2
           </a>
         </li>

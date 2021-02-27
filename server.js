@@ -24,6 +24,7 @@ server.use(require("./routes/authorization"));
 server.use(require("./routes/registration"));
 server.use(require("./routes/create"));
 server.use(require("./routes/views"));
+server.use(require("./routes/edit"));
 
 server.listen(PORT, () => {
   console.log(`Server is running at https://localhost:${PORT}`);
