@@ -5,7 +5,11 @@ const roomDetails = new mongoose.Schema({
   roomName: { type: String, required: true, text: true },
   cryptedName: { type: String, required: true },
   description: { type: String, required: true },
-  roomImage: { type: String, default: "photo" },
+  roomImage: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/aktech27/image/upload/v1614421879/cloudemy/roompics/defaultpic.png",
+  },
   shownOnSearch: { type: Boolean, default: true },
   privateRoom: { type: Boolean, default: false },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "userDetails" },

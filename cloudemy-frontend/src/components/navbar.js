@@ -21,7 +21,7 @@ const Navbar = (props) => {
         </li>
         <li>
           <a className={props.Active[1]} href="./createroom">
-            Link2
+            Create Room
           </a>
         </li>
         <li>

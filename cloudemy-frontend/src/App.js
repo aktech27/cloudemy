@@ -8,6 +8,8 @@ import ForgotPassword from "./pages/forgotPassword";
 import ResetPassword from "./pages/resetPassword";
 import Dashboard from "./pages/dashboard";
 import EditProfile from "./pages/editProfile";
+import CreateRoom from "./pages/createRoom";
+import CreateShelf from "./pages/createShelf";
 import RoomView from "./pages/roomView";
 import ShelfView from "./pages/shelfView";
 import JoinRoom from "./pages/joinRoom";
@@ -25,6 +27,8 @@ function App() {
           <Route path="/forgot" component={ForgotPassword} />
           <Route path="/reset" component={ResetPassword} />
           <Route path="/editprofile" component={EditProfile} />
+          <Route path="/createroom" component={CreateRoom} />
+          <Route path="/createshelf" component={CreateShelf} />
           <Route path="/join" component={JoinRoom} />
           <Route exact path="/room/:roomCode" component={RoomView} />
           <Route exact path="/shelf/:shelfCode" component={ShelfView} />

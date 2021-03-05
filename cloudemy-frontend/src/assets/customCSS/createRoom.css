@@ -1,0 +1,33 @@
+#createRoom,
+#createShelf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px double black;
+  border-radius: 40px 20px;
+  font-family: "Cairo", san-serif;
+  padding: 20px 15px;
+}
+#create-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+.input-label {
+  min-width: 500px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.input-label input,
+.input-label span,
+.input-label textarea {
+  font-size: 18px;
+  width: 300px;
+}
+.input-label textarea {
+  height: 100px;
+}
