@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import "../assets/customCSS/createRoom.css";
 import ToggleButton from "../components/toggleBtn";
 import Navbar from "../components/navbar";
+import ShowToast from "../assets/toast";
+import axios from "axios";
 
 const CreateShelf = () => {
+  const History = useHistory();
+  const { roomCode } = useParams();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageURL, setImageURL] = useState(
@@ -11,22 +16,34 @@ const CreateShelf = () => {
   );
   const [image, setImage] = useState("");
   const [Protected, setProtected] = useState(false);
+  const create = (e) => {
+    e.preventDefault();
+    const formdata = new FormData();
+    formdata.append("shelfImage", image);
+    formdata.append("shelfName", name);
+    formdata.append("description", description);
+    formdata.append("belongsTo", roomCode);
+    axios
+      .post("/createshelf", formdata, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      })
+      .then((res) => {
+        ShowToast(res.data.message, "green");
+        History.push("../");
+      })
+      .catch((err) => {
+        ShowToast(err.response.data.error, "red");
+        History.push("../");
+      });
+  };
+
   return (
     <React.Fragment>
       <Navbar Active={["inactive", "inactive", "inactive", "inactive"]} />
       <div id="create-container">
-        <form
-          style={{ width: "500px" }}
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log({
-              Name: name,
-              Description: description,
-              Image: image,
-              Protected,
-            });
-          }}
-        >
+        <form style={{ width: "500px" }} onSubmit={(e) => create(e)}>
           <fieldset id="createShelf">
             <legend
               style={{ textAlign: "center", fontFamily: "'Cairo',san-serif", fontSize: "38px" }}
@@ -68,13 +85,18 @@ const CreateShelf = () => {
             </div>
             <label className="input-label">
               Shelf Name
-              <input placeholder="Shelf Name" onChange={(e) => setName(e.target.value)} />
+              <input
+                placeholder="Shelf Name"
+                onChange={(e) => setName(e.target.value)}
+                required={true}
+              />
             </label>
             <label className="input-label">
               Shelf Description
               <textarea
                 placeholder="Enter a description"
                 onChange={(e) => setDescription(e.target.value)}
+                required={true}
               />
             </label>
             <label className="input-label">

@@ -1,11 +1,15 @@
 import axios from "axios";
 import "../assets/customCSS/dashboard.css";
 import Empty from "../assets/empty.png";
+import Spinner from "../components/spinner";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const Rooms = () => {
   const [rooms, setrooms] = useState([{}]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     axios
       .get("/viewrooms", {
         headers: {
@@ -14,6 +18,7 @@ const Rooms = () => {
       })
       .then((res) => {
         setrooms(res.data.rooms);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,6 +59,7 @@ const Rooms = () => {
 
   return (
     <div className="room-list">
+      <Spinner Status={loading} />
       <h1 style={{ textAlign: "center" }}>List of rooms available</h1>
       {ReturnRooms()}
     </div>

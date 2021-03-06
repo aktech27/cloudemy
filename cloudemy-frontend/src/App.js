@@ -28,7 +28,7 @@ function App() {
           <Route path="/reset" component={ResetPassword} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/createroom" component={CreateRoom} />
-          <Route path="/createshelf" component={CreateShelf} />
+          <Route path="/:roomCode/createshelf" component={CreateShelf} />
           <Route path="/join" component={JoinRoom} />
           <Route exact path="/room/:roomCode" component={RoomView} />
           <Route exact path="/shelf/:shelfCode" component={ShelfView} />

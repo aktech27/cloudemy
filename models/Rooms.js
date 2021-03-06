@@ -10,7 +10,7 @@ const roomDetails = new mongoose.Schema({
     default:
       "https://res.cloudinary.com/aktech27/image/upload/v1614421879/cloudemy/roompics/defaultpic.png",
   },
-  shownOnSearch: { type: Boolean, default: true },
+  showOnSearch: { type: Boolean, default: true },
   privateRoom: { type: Boolean, default: false },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "userDetails" },
   subAdmins: [{ type: mongoose.Schema.Types.ObjectId, ref: "userDetails" }],

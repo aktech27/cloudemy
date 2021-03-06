@@ -2,7 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import "../assets/customCSS/signup.css";
 import Logo from "../assets/appLogo.png";
+import ShowToast from "../assets/toast";
 import InputTag from "../components/inputTag";
+import Spinner from "../components/spinner";
 import { inputFocused } from "../assets/customCSS/signAnim";
 import {
   nameValidator,
@@ -18,6 +20,7 @@ const Signup = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const Register = (e) => {
     e.preventDefault();
@@ -45,16 +48,22 @@ const Signup = () => {
       inputFocused("ph-cpswd", confirmPassword);
     } else {
       let request = { firstName, lastName, email, password, phone };
+      setLoading(true);
       axios
         .post("/register", request)
-        .then((res) => console.log(res.data))
+        .then((res) => {
+          ShowToast(res.data.message, "green");
+          setLoading(false);
+        })
         .catch((err) => {
-          console.log(err);
+          ShowToast(err.response.data.error, "red");
+          setLoading(false);
         });
     }
   };
   return (
     <div className="container">
+      <Spinner Status={loading} />
       <form style={{ width: "800px" }} onSubmit={(e) => Register(e)}>
         <fieldset style={{ border: "5px double black", borderRadius: "40px 20px" }}>
           <legend

@@ -1,13 +1,16 @@
 import axios from "axios";
 import "../assets/customCSS/shelf.css";
 import Empty from "../assets/empty.png";
+import Spinner from "../components/spinner";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 const Shelfs = () => {
   let { roomCode } = useParams();
   const [shelfs, setshelf] = useState([{}]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .post(
         "/viewshelfs",
@@ -19,6 +22,7 @@ const Shelfs = () => {
         }
       )
       .then((res) => {
+        setLoading(false);
         setshelf(res.data.shelfs);
       })
       .catch((err) => console.log(err));
@@ -41,7 +45,7 @@ const Shelfs = () => {
               <Link
                 key={Math.random().toString()}
                 style={{ textDecoration: "none" }}
-                to={"../shelf/" + shelf.cryptedName}
+                to={"/shelf/" + shelf.cryptedName}
               >
                 <div className="card">
                   <div className="card-container">
@@ -59,6 +63,8 @@ const Shelfs = () => {
   };
   return (
     <div className="shelf-list">
+      <Spinner Status={loading} />
+      <Link to={"../" + roomCode + "/createshelf"}>Create Shelf</Link>
       <h1 style={{ textAlign: "center" }}>List of Shelfs available</h1>
       {ReturnShelfs()}
     </div>

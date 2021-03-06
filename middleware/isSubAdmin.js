@@ -17,7 +17,7 @@ const isSubAdmin = (req, res, next) => {
       .findById(_id)
       .select("_id firstName lastName accountType")
       .then((validUser) => {
-        if (validUser.accountType !== "SubAdmin") {
+        if (!(validUser.accountType === "SubAdmin" || validUser.accountType === "Admin")) {
           return res.status(401).send({ error: "Only Sub-Admins are allowed" });
         }
         req.user = validUser;

@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "../assets/customCSS/createRoom.css";
 import ToggleButton from "../components/toggleBtn";
 import Navbar from "../components/navbar";
+import Spinner from "../components/spinner";
+import ShowToast from "../assets/toast";
+import axios from "axios";
+
 const CreateRoom = () => {
+  const History = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageURL, setImageURL] = useState(
@@ -11,23 +17,41 @@ const CreateRoom = () => {
   const [image, setImage] = useState("");
   const [showOnSearch, setShowOnSearch] = useState(true);
   const [privateRoom, setPrivateRoom] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const create = (e) => {
+    e.preventDefault();
+    const formdata = new FormData();
+    formdata.append("roomImage", image);
+    formdata.append("roomName", name);
+    formdata.append("description", description);
+    formdata.append("showOnSearch", showOnSearch);
+    formdata.append("privateRoom", privateRoom);
+    setLoading(true);
+    axios
+      .post("/createroom", formdata, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      })
+      .then((res) => {
+        setLoading(false);
+        ShowToast(res.data.message, "green");
+        History.push("../");
+      })
+      .catch((err) => {
+        setLoading(false);
+        ShowToast(err.response.data.error, "red");
+        History.push("../");
+      });
+  };
+
   return (
     <React.Fragment>
       <Navbar Active={["inactive", "active", "inactive", "inactive"]} />
       <div id="create-container">
-        <form
-          style={{ width: "500px" }}
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log({
-              Name: name,
-              Description: description,
-              Image: image,
-              Search: showOnSearch,
-              Private: privateRoom,
-            });
-          }}
-        >
+        <Spinner Status={loading} />
+        <form style={{ width: "500px" }} onSubmit={(e) => create(e)}>
           <fieldset id="createRoom">
             <legend
               style={{ textAlign: "center", fontFamily: "'Cairo',san-serif", fontSize: "38px" }}
@@ -40,7 +64,7 @@ const CreateRoom = () => {
                 type="file"
                 accept="image/*"
                 multiple={false}
-                name="roompic"
+                name="roomImage"
                 onChange={(e) => {
                   setImage(e.target.files[0]);
                   let reader = new FileReader();
@@ -69,12 +93,17 @@ const CreateRoom = () => {
             </div>
             <label className="input-label">
               Room Name
-              <input placeholder="Room Name" onChange={(e) => setName(e.target.value)} />
+              <input
+                placeholder="Room Name"
+                onChange={(e) => setName(e.target.value)}
+                required={true}
+              />
             </label>
             <label className="input-label">
               Room Description
               <textarea
                 placeholder="Enter a description"
+                required={true}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </label>

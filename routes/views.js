@@ -23,8 +23,8 @@ router.post("/viewshelfs", isLogged, (req, res) => {
 router.post("/searchroom", isLogged, (req, res) => {
   Rooms.find({
     $or: [
-      { roomName: { $regex: req.body.roomName, $options: "i" } },
-      { cryptedName: { $regex: req.body.roomName, $options: "i" } },
+      { roomName: { $regex: req.body.roomName, $options: "i" }, showOnSearch: true },
+      { cryptedName: { $regex: req.body.roomName, $options: "i" }, showOnSearch: true },
     ],
   })
     .populate("createdBy", "_id firstName lastName")
